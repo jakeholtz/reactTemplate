@@ -1,12 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import PropTypes from 'prop-types';
 
-export default class App extends Component {
+export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = { loading : true };
-    this.propTypes = { waitBeforeShow: PropTypes.number.isRequired };
+  }
+
+  componentDidMount() {
+    setTimeout(() => {
+       this.setState({ loading: false });
+    }, this.props.waitBeforeShow);
   }
 
   render() {
@@ -14,5 +18,7 @@ export default class App extends Component {
     return <div className="app-container">Hello World!</div>
   }
 }
+
+
 
 ReactDOM.render(<App waitBeforeShow={500} />, document.getElementById('app'));
